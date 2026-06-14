@@ -9,7 +9,7 @@ import type { Status } from "../components/StatusCard";
 
 export default function Dashboard() {
   const { patients, loading, error } = usePatients();
-  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
+  const [selectedPatientId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   // Derive stat counts from real data

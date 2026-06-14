@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import StatusCard from "../components/StatusCard";
 import { usePatients } from "../context/PatientContext";
 import type { Status } from "../components/StatusCard";
-import { fetchConditions, fetchDoctors } from "../utils/api";
+import { fetchConditions, /*fetchDoctors*/ } from "../utils/api";
 
 const AVATAR_BG: Record<Status, { bg: string; color: string }> = {
   stable:   { bg: "var(--bg-stable)",   color: "var(--color-stable)" },
@@ -40,14 +40,14 @@ function AddPatientModal({ onClose, onAdded }: AddPatientModalProps) {
   const [saving, setSaving] = useState(false);
   const [error,  setError]  = useState("");
   const [conditions, setConditions] = useState<{id: number; condition_name: string}[]>([]);
-  const [doctors, setDoctors] = useState<{id: number; first_name: string; last_name: string}[]>([]);
+  //const [doctors, setDoctors] = useState<{id: number; first_name: string; last_name: string}[]>([]);
 
   useEffect(() => {
     //fetch conditions
     fetchConditions().then(setConditions).catch(console.error);
     //fetch doctors
-    fetchDoctors().then(setDoctors).catch(console.error);
-  },[]) 
+    //fetchDoctors().then(setDoctors).catch(console.error);
+  },[])
 
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
