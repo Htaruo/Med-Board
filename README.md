@@ -113,7 +113,3 @@ Output is generated in the `dist/` folder.
 ## Deployment
 
 This project is deployed on [Vercel](https://vercel.com). Set the `VITE_API_URL` environment variable in your Vercel project settings to point to your deployed backend.
-
-## License
-
-This project was built for educational purposes.
