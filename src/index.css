@@ -1,0 +1,140 @@
+/* ── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Design tokens ──────────────────────────────────────── */
+:root {
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  /* Backgrounds */
+  --bg-page:    #F4F6F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle:  #EEF1EF;
+
+  /* Borders */
+  --border:       #D9DDD9;
+  --border-focus: #1D7A58;
+
+  /* Text */
+  --text-primary:   #1A1F1B;
+  --text-secondary: #6B756C;
+  --text-muted:     #9BA59C;
+
+  /* Semantic colours */
+  --color-stable:   #1D7A58;
+  --bg-stable:      #E5F4EE;
+
+  --color-watch:    #B85C1A;
+  --bg-watch:       #FBF0E6;
+
+  --color-critical: #C0392B;
+  --bg-critical:    #FBEAE8;
+
+  --color-info:     #1A5A8A;
+  --bg-info:        #E6F0F9;
+
+  /* Spacing */
+  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;
+  --space-4: 16px;  --space-5: 20px;  --space-6: 24px;  --space-8: 32px;
+
+  /* Radius */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.08);
+}
+
+/* ── Base ───────────────────────────────────────────────── */
+html { font-size: 14px; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--color-stable); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { font-family: var(--font-sans); cursor: pointer; }
+
+/* ── Layout ─────────────────────────────────────────────── */
+.page-wrapper {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--space-6);
+}
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+.page-title   { font-size: 22px; font-weight: 600; letter-spacing: -.4px; }
+.page-subtitle{ font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
+
+.grid-2 { display: grid; grid-template-columns: 1.4fr 1fr;        gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr);   gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr);   gap: 12px; }
+
+/* ── Panel / card ───────────────────────────────────────── */
+.panel { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.panel-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px; border-bottom: 1px solid var(--border);
+}
+.panel-title { font-size: 13px; font-weight: 600; letter-spacing: -.1px; }
+
+/* ── Stat card ──────────────────────────────────────────── */
+.stat-card   { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 18px; }
+.stat-label  { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .6px; color: var(--text-secondary); margin-bottom: 8px; }
+.stat-value  { font-size: 26px; font-weight: 600; letter-spacing: -1px; }
+.stat-sub    { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* ── Badges ─────────────────────────────────────────────── */
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: var(--radius-full); font-size: 11px; font-weight: 600; letter-spacing: .2px; }
+.badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .8; }
+.badge-stable   { background: var(--bg-stable);   color: var(--color-stable); }
+.badge-watch    { background: var(--bg-watch);     color: var(--color-watch); }
+.badge-critical { background: var(--bg-critical);  color: var(--color-critical); }
+.badge-info     { background: var(--bg-info);      color: var(--color-info); }
+
+/* ── Tag ────────────────────────────────────────────────── */
+.tag { font-size: 10px; font-family: var(--font-mono); background: var(--bg-subtle); border: 1px solid var(--border); padding: 2px 7px; border-radius: var(--radius-sm); color: var(--text-secondary); }
+
+/* ── Table ──────────────────────────────────────────────── */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th { padding: 10px 18px; text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--text-secondary); background: var(--bg-subtle); border-bottom: 1px solid var(--border); }
+.data-table td { padding: 11px 18px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--bg-subtle); }
+
+/* ── Mono helper ────────────────────────────────────────── */
+.mono { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); }
+
+/* ── Form inputs ────────────────────────────────────────── */
+input, select, textarea {
+  font-family: var(--font-sans); font-size: 13px;
+  background: var(--bg-surface); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 8px 12px;
+  color: var(--text-primary); width: 100%;
+  transition: border-color .15s;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--border-focus); }
+
+/* ── Buttons ────────────────────────────────────────────── */
+.btn-primary { background: var(--color-stable); color: #fff; border: none; border-radius: var(--radius-sm); padding: 9px 18px; font-size: 13px; font-weight: 500; transition: opacity .15s; }
+.btn-primary:hover { opacity: .88; }
+.btn-ghost   { background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 16px; font-size: 13px; color: var(--text-primary); transition: background .15s; }
+.btn-ghost:hover { background: var(--bg-subtle); }
+.btn-link    { background: none; border: none; color: var(--color-stable); font-size: 11px; font-weight: 600; padding: 0; }
+.btn-link:hover { text-decoration: underline; }
+
+/* ── Utility ────────────────────────────────────────────── */
+.text-muted   { color: var(--text-secondary); }
+.text-danger  { color: var(--color-critical); }
+.text-success { color: var(--color-stable); }
+.text-warn    { color: var(--color-watch); }
