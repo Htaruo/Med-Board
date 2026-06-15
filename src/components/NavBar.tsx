@@ -52,10 +52,16 @@ export default function NavBar() {
         display: "flex", alignItems: "center", gap: 8,
         textDecoration: "none", color: "inherit",
       }}>
-        <span style={{
-          width: 8, height: 8, borderRadius: "50%",
-          background: "var(--color-stable)", display: "inline-block",
-        }} />
+        <img
+          src="/logo.png"
+          alt="MedBoard logo"
+          style={{
+            width: 28, height: 28,
+            borderRadius: 6,
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
         MedBoard
       </Link>
 
