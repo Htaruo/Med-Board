@@ -57,8 +57,8 @@ function AddPatientModal({ onClose, onAdded }: AddPatientModalProps) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    if (!form.first_name || !form.last_name || !form.age) {
-      setError("First name, last name and age are required.");
+    if (!form.patient_code.trim() || !form.first_name || !form.last_name || !form.age) {
+      setError("Patient code, first name, last name and age are required.");
       return;
     }
     setSaving(true);
