@@ -1,0 +1,377 @@
+/* ═══════════════════════════════════════════════════════════
+   components.css — Reusable UI component styles
+   Import in main.tsx: import "./components/components.css"
+═══════════════════════════════════════════════════════════ */
+
+/* ── Buttons ──────────────────────────────────────────── */
+.btn-primary {
+  background: var(--color-stable);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: opacity 0.15s;
+}
+
+.btn-primary:hover    { opacity: 0.88; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-ghost {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-size: 13px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: background 0.15s;
+}
+
+.btn-ghost:hover { background: var(--bg-subtle); }
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--color-stable);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.btn-link:hover { text-decoration: underline; }
+
+/* ── Badge (status) ───────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.badge-stable   { background: var(--bg-stable);   color: var(--color-stable); }
+.badge-watch    { background: var(--bg-watch);     color: var(--color-watch); }
+.badge-critical { background: var(--bg-critical);  color: var(--color-critical); }
+.badge-info     { background: var(--bg-info);      color: var(--color-info); }
+
+/* ── Tag (condition label) ────────────────────────────── */
+.tag {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+}
+
+/* ── Count badge ──────────────────────────────────────── */
+.count-badge {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  background: var(--bg-info);
+  color: var(--color-info);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+/* ── Avatar ───────────────────────────────────────────── */
+.avatar {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.avatar-lg { width: 72px; height: 72px; font-size: 22px; letter-spacing: -0.5px; }
+.avatar-md { width: 56px; height: 56px; font-size: 20px; }
+.avatar-sm { width: 32px; height: 32px; font-size: 12px; }
+
+.avatar-stable   { background: var(--bg-stable);   color: var(--color-stable); }
+.avatar-watch    { background: var(--bg-watch);     color: var(--color-watch); }
+.avatar-critical { background: var(--bg-critical);  color: var(--color-critical); }
+.avatar-recovery { background: var(--bg-info);      color: var(--color-info); }
+
+/* ── Patient card ─────────────────────────────────────── */
+.patient-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.patient-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.patient-name {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* ── Table ────────────────────────────────────────────── */
+.data-table { width: 100%; border-collapse: collapse; }
+
+.data-table th {
+  padding: 10px 18px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table td {
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td      { background: var(--bg-subtle); }
+.data-table tr.active td     { background: var(--bg-subtle); font-weight: 500; }
+.data-table tr.clickable     { cursor: pointer; }
+
+/* ── Form inputs ──────────────────────────────────────── */
+input, select, textarea {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  color: var(--text-primary);
+  width: 100%;
+  transition: border-color 0.15s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+}
+
+/* ── Navbar ───────────────────────────────────────────── */
+.navbar {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  font-size: 17px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-stable);
+  display: inline-block;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ── Dropdown ─────────────────────────────────────────── */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  min-width: 160px;
+  z-index: 200;
+}
+
+.dropdown-menu-right { right: 0; }
+.dropdown-menu-left  { left: 0; }
+
+.dropdown-item {
+  padding: 9px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.dropdown-item:hover       { background: var(--bg-subtle); }
+.dropdown-item.active      { background: var(--bg-subtle); font-weight: 600; }
+.dropdown-item.danger      { color: var(--color-critical); }
+.dropdown-item.danger:hover{ background: var(--bg-critical); }
+
+.dropdown-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dropdown-divider {
+  border-top: 1px solid var(--border);
+}
+
+/* ── Ward badge button ────────────────────────────────── */
+.ward-badge {
+  background: var(--bg-stable);
+  color: var(--color-stable);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Medicine schedule row ────────────────────────────── */
+.med-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.med-row:last-child { border-bottom: none; }
+
+.med-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.med-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--border);
+  transition: background 0.15s, border-color 0.15s;
+  font-size: 11px;
+  color: #fff;
+}
+
+.med-check.done {
+  background: var(--color-stable);
+  border-color: var(--color-stable);
+}
+
+/* ── Navbar left section (logo + nav links) ───────────── */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0; /* allows children to shrink instead of overflowing */
+}
+
+.navbar-logo-link {
+  font-size: 17px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.navbar-logo-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+}
+
+.navbar-link {
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* ── Utility ──────────────────────────────────────────── */
+.mono        { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); }
+.text-muted  { color: var(--text-secondary); }
+.text-danger { color: var(--color-critical); }
+.text-success{ color: var(--color-stable); }
+.text-warn   { color: var(--color-watch); }
+
+/* ── Mobile: navbar ───────────────────────────────────── */
+@media (max-width: 480px) {
+  .navbar          { padding: 0 14px; }
+  .navbar-left     { gap: 12px; }
+  .navbar-logo-text{ display: none; } /* keep just the logo mark on very narrow screens */
+  .navbar-link     { font-size: 13px; }
+}
