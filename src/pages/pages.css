@@ -46,7 +46,7 @@
 }
 
 /* ── Grid layouts ─────────────────────────────────────── */
-.grid-2   { display: grid; grid-template-columns: 1.4fr 1fr;      gap: 20px; }
+/*.grid-2   { display: grid; grid-template-columns: 1.4fr 1fr;      gap: 20px; }*/
 .grid-3   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .grid-4   { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .grid-auto{ display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
@@ -76,7 +76,6 @@
 }
 
 .panel-body   { padding: 20px 18px; }
-
 .panel-footer {
   padding: 10px 18px;
   border-top: 1px solid var(--border);
@@ -179,7 +178,7 @@
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 768px) {
-  .grid-2, .grid-3 { grid-template-columns: 1fr; } 
+  .grid-3 { grid-template-columns: 1fr; }
   .grid-4 { grid-template-columns: 1fr 1fr; }
   .info-strip                { grid-template-columns: repeat(2, 1fr); }
   .page-wrapper              { padding: var(--space-4); }

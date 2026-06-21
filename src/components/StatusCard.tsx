@@ -7,7 +7,7 @@ export type Status = "stable" | "monitoring" | "critical" | "recovery";
 
 const CONFIG: Record<Status, { label: string; cls: string }> = {
   stable:     { label: "Stable",      cls: "badge badge-stable" },
-  monitoring: { label: "Monitoring",  cls: "badge badge-watch" },  // ← was "watch"
+  monitoring: { label: "Monitoring",  cls: "badge badge-watch" },  
   critical:   { label: "Critical",    cls: "badge badge-critical" },
   recovery:   { label: "Recovery",    cls: "badge badge-info" },
 };

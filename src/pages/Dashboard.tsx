@@ -123,7 +123,7 @@ export default function Dashboard() {
       </div>
 
       {/* ── Patient table + Medicine schedule ── */}
-    <div className="grid-2" style={{ marginBottom: 20 }}>
+    <div style={{ marginBottom: 20 }}>
       <div className="panel">
         <div className="panel-head">
           <span className="panel-title">Patient Status</span>
@@ -212,21 +212,7 @@ export default function Dashboard() {
           </div>
         )}
       </div>
-
-  {/* Doctor's Orders section continues below unaltered... */}
-        {activePatientId ? (
-          <MedSchedule patientId={activePatientId} />
-        ) : (
-          <div className="panel">
-            <div className="panel-head">
-              <span className="panel-title">Doctor's Orders</span>
-            </div>
-            <div style={{ padding: 32, textAlign: "center", color: "var(--text-secondary)" }}>
-              Select a patient to view their schedule
-            </div>
-          </div>
-        )}
-      </div>
+    </div>
 
       {/* ── Bottom panels ── */}
       <div className="grid-3">

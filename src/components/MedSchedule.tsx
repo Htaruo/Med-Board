@@ -1,4 +1,4 @@
-// MedSchedule.tsx
+// Doctor's Orders.tsx
 // Today's medicine schedule for one patient.
 // Nurses click the circle checkbox to mark a dose as given.
 // Props:
@@ -38,7 +38,7 @@ export default function MedSchedule({ patientId }: Props) {
   return (
     <div className="panel">
       <div className="panel-head">
-        <span className="panel-title">Medicine Intake — Today</span>
+        <span className="panel-title">Doctor's Orders</span>
         <span className="mono">{patientId}</span>
       </div>
 
