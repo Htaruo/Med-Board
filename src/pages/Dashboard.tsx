@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import StatusCard from "../components/StatusCard";
 import LiveClock from "../components/LiveClock";
-import MedSchedule from "../components/MedSchedule";
+//import MedSchedule from "../components/MedSchedule";
 import { usePatients } from "../context/PatientContext";
 import type { Status } from "../components/StatusCard";
 
 export default function Dashboard() {
   const { patients, loading, error } = usePatients();
-  const [selectedPatientId] = useState<string | null>(null);
+  //const [selectedPatientId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,7 +29,7 @@ export default function Dashboard() {
   );
 
   // Default to first patient once data loads
-  const activePatientId = selectedPatientId ?? patients[0]?.id ?? "";
+  //const activePatientId = selectedPatientId ?? patients[0]?.id ?? "";
 
   // Filter patients by search
   const filtered = patients.filter(p =>
