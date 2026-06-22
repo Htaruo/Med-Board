@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../utils/api";
+import { usePatients } from "../context/PatientContext";
 
 export default function Login() {
   const [email,    setEmail]    = useState("");
@@ -8,6 +9,7 @@ export default function Login() {
   const [error,    setError]    = useState("");
   const [loading,  setLoading]  = useState(false);
   const navigate                = useNavigate();
+  const { refetch }             = usePatients();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -17,6 +19,7 @@ export default function Login() {
       const { token, user } = await loginUser(email, password);
       localStorage.setItem("token", token);
       localStorage.setItem("user",  JSON.stringify(user));
+      await refetch();
       navigate("/");
     } catch (e: any) {
       setError(e.message);
