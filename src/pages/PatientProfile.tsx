@@ -26,11 +26,54 @@ interface Doctor{
   last_name: string;
 }
 
+interface VitalRecord {
+  name: string;
+  value: string;
+  unit: string;
+  icon: string;
+  status: "normal" | "warning" | "danger";
+  statusLabel: string;
+}
+
+const getVitalsForStatus = (status: Status): VitalRecord[] => {
+  switch (status) {
+    case "monitoring":
+      return [
+        { name: "Heart Rate", value: "88", unit: "bpm", icon: "❤️", status: "warning", statusLabel: "Elevated" },
+        { name: "Blood Pressure", value: "135/85", unit: "mmHg", icon: "🩺", status: "warning", statusLabel: "Prehypertension" },
+        { name: "Temperature", value: "37.5", unit: "°C", icon: "🌡️", status: "normal", statusLabel: "Normal" },
+        { name: "SpO2", value: "95", unit: "%", icon: "🫁", status: "warning", statusLabel: "Borderline" }
+      ];
+    case "critical":
+      return [
+        { name: "Heart Rate", value: "112", unit: "bpm", icon: "❤️", status: "danger", statusLabel: "Tachycardia" },
+        { name: "Blood Pressure", value: "160/100", unit: "mmHg", icon: "🩺", status: "danger", statusLabel: "Stage 2 HTN" },
+        { name: "Temperature", value: "38.9", unit: "°C", icon: "🌡️", status: "danger", statusLabel: "High Fever" },
+        { name: "SpO2", value: "91", unit: "%", icon: "🫁", status: "danger", statusLabel: "Hypoxia" }
+      ];
+    case "recovery":
+      return [
+        { name: "Heart Rate", value: "68", unit: "bpm", icon: "❤️", status: "normal", statusLabel: "Normal" },
+        { name: "Blood Pressure", value: "118/78", unit: "mmHg", icon: "🩺", status: "normal", statusLabel: "Normal" },
+        { name: "Temperature", value: "36.5", unit: "°C", icon: "🌡️", status: "normal", statusLabel: "Normal" },
+        { name: "SpO2", value: "99", unit: "%", icon: "🫁", status: "normal", statusLabel: "Normal" }
+      ];
+    case "stable":
+    default:
+      return [
+        { name: "Heart Rate", value: "72", unit: "bpm", icon: "❤️", status: "normal", statusLabel: "Normal" },
+        { name: "Blood Pressure", value: "120/80", unit: "mmHg", icon: "🩺", status: "normal", statusLabel: "Normal" },
+        { name: "Temperature", value: "36.8", unit: "°C", icon: "🌡️", status: "normal", statusLabel: "Normal" },
+        { name: "SpO2", value: "98", unit: "%", icon: "🫁", status: "normal", statusLabel: "Normal" }
+      ];
+  }
+};
+
 export default function PatientProfile() {
   const { id }                       = useParams<{ id: string }>();
   const navigate                     = useNavigate();
   const { getPatient, updateStatus, loading, patients, refetch } = usePatients();
-  const patient                      = getPatient(id!);
+  const patient                      = id ? getPatient(id) : undefined;
 
   const stored = localStorage.getItem("user");
   const user = stored ? JSON.parse(stored) : {role : "nurse"};
@@ -46,7 +89,7 @@ export default function PatientProfile() {
     }
   }, [isAdmin]);
  
-  console.log("loading:", loading, "| patients.length:", patients.length, "| id:", id, "| found:", !!getPatient(id!));
+  console.log("loading:", loading, "| patients.length:", patients.length, "| id:", id, "| found:", id ? !!getPatient(id) : false);
 
 
   if (loading) return (
@@ -66,10 +109,11 @@ export default function PatientProfile() {
 
   const status = patient.status as Status;
   const safeBg = AVATAR_BG[status] ?? AVATAR_BG.stable;
+  const vitals = getVitalsForStatus(status);
 
-  const infoRows = [
+  const infoRows: [string, React.ReactNode][] = [
     ["Ward / Bed",  patient.ward],
-    ["Condition",   patient.condition],
+    ["Condition",   <span className="tag">{patient.condition}</span>],
     ["Admitted",    patient.admittedOn
                       ? new Date(patient.admittedOn).toLocaleDateString("en-PH", {
                           year: "numeric", month: "short", day: "numeric"
@@ -78,20 +122,21 @@ export default function PatientProfile() {
     ["Physician",   patient.doctor ?? "—"],
   ];
 
-  async function handleAssigDoctor(e: React.ChangeEvent<HTMLSelectElement>) {
-    const doctor_id = Number(e.target.value);
-    if(!doctor_id) return;
+  async function handleAssignDoctor(e: React.ChangeEvent<HTMLSelectElement>) {
+    const doctor_val = e.target.value;
+    const doctor_id = doctor_val ? Number(doctor_val) : null;
 
     setAssigning(true);
     setAssignError("");
-    try{
+    try {
       await assignDoctor(patient!.id, doctor_id);
       await refetch();
-    } catch(err: any) {
+    } catch (err: any) {
       setAssignError(err.message ?? "Failed to assign doctor");
     } finally {
       setAssigning(false);
-    }};
+    }
+  }
 
   return (
     <div className="page-wrapper">
@@ -181,8 +226,8 @@ export default function PatientProfile() {
         }}>
           <span className="stat-label" style={{marginBottom: 0}}> Assign Doctor</span>
           <select
-            defaultValue={patient.doctor_id}
-            onChange={handleAssigDoctor}
+            value={patient.doctor_id ?? ""}
+            onChange={handleAssignDoctor}
             disabled={assigning}
             style={{
               fontSize: 12, fontWeight: 600,
@@ -191,14 +236,15 @@ export default function PatientProfile() {
               border: "1.5px solid var(--border)",
               cursor: "pointer",
               width: "auto",
-            }}> 
-              <option value="">Set Doctor</option>
-              {doctors.map(d => (
-                <option key={d.id} value={d.id}>
-                  Dr. {d.first_name} {d.last_name}
-                </option>
-              ))}
-            </select>
+            }}
+          > 
+            <option value="">Set Doctor</option>
+            {doctors.map(d => (
+              <option key={d.id} value={d.id}>
+                Dr. {d.first_name} {d.last_name}
+              </option>
+            ))}
+          </select>
 
             {assigning && (
               <span style={{fontSize: 12, color: "var(--text-secondary)"}}>
@@ -226,8 +272,20 @@ export default function PatientProfile() {
             <span className="panel-title">Vitals</span>
             <button className="btn-link">+ Add reading</button>
           </div>
-          <div style={{ padding: 40, textAlign: "center", color: "var(--text-secondary)" }}>
-            Vitals chart — coming soon
+          <div className="vitals-grid">
+            {vitals.map(v => (
+              <div key={v.name} className={`vital-card ${status}`}>
+                <div className="vital-header">
+                  <span className="vital-title">{v.name}</span>
+                  <span className="vital-icon">{v.icon}</span>
+                </div>
+                <div className="vital-body">
+                  <span className="vital-value">{v.value}</span>
+                  <span className="vital-unit">{v.unit}</span>
+                </div>
+                <span className={`vital-status ${v.status}`}>{v.statusLabel}</span>
+              </div>
+            ))}
           </div>
         </div>
 

@@ -47,3 +47,12 @@ npm-debug.log*
 # OS files
 .DS_Store
 Thumbs.db
+
+# AntiGravity runtime logs, histories, and workspace states
+.agent/runs/
+.agent/tmp/
+.agent/browser-sessions/
+.agent/screenshots/
+
+# Local environment flags for agents
+.agent/config.local.json

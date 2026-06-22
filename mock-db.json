@@ -81,7 +81,7 @@
       "age": 42,
       "ward_bed": "Ward B - Bed 12",
       "condition_id": 1,
-      "status_id": 1,
+      "status_id": 2,
       "admitted_at": "2026-06-15",
       "doctor_id": 10,
       "medicines": [

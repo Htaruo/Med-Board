@@ -92,13 +92,12 @@ export async function fetchDoctors() {
   return res.json();
 }
 
-export async function assignDoctor(patientId: string, doctor_id: Number){
+export async function assignDoctor(patientId: string, doctor_id: number | null) {
   const res = await fetch(`${BASE}/patients/${patientId}/assign-doctor`, {
     method: `PATCH`,
     headers: authHeaders(),
-    body: JSON.stringify({doctor_id}),
+    body: JSON.stringify({ doctor_id }),
   });
-
-  if(!res.ok) throw new Error("Failed to assign doctor");
+  if (!res.ok) throw new Error("Failed to assign doctor");
   return res.json();
 }
