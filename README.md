@@ -32,7 +32,7 @@ src/
 ├── components/
 │   ├── NavBar.tsx          # Top navigation with ward and user dropdowns
 │   ├── StatusCard.tsx       # Status badge component
-│   ├── MedSchedule.tsx      # Medicine intake checklist
+│   ├── DocOrder.tsx      # Doctor's orders component
 │   ├── LiveClock.tsx        # Real-time clock display
 │   └── components.css       # Shared component styles
 ├── pages/
