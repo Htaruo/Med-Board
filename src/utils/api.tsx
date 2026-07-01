@@ -102,3 +102,33 @@ export async function assignDoctor(patientId: string, doctor_id: Number){
   if(!res.ok) throw new Error("Failed to assign doctor");
   return res.json();
 }
+
+// ── Doctor Orders ───────────────────────────────────────
+export async function fetchDoctorOrders(patientId: string) {
+  const res = await fetch(`${BASE}/orders/patients/${patientId}`, {
+    headers: authHeaders(),
+  });
+  if (!res.ok) throw new Error("Failed to fetch doctor orders");
+  return res.json();
+}
+
+export async function createDoctorOrder(patientId: string, payload: any) {
+  const res = await fetch(`${BASE}/orders/patients/${patientId}`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(payload),
+  });
+  if (res.status === 201 || res.ok) return res.json();
+  const text = await res.text();
+  throw new Error("Failed to create doctor order: " + text);
+}
+
+export async function discontinueOrder(orderId: number, user_id: number) {
+  const res = await fetch(`${BASE}/orders/${orderId}/discontinue`, {
+    method: "PATCH",
+    headers: authHeaders(),
+    body: JSON.stringify({ user_id }),
+  });
+  if (!res.ok) throw new Error("Failed to discontinue order");
+  return res.json();
+}
