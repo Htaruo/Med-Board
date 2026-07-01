@@ -2,7 +2,7 @@
 // Reads from PatientContext so status changes persist across navigation.
 
 import { useParams, useNavigate } from "react-router-dom";
-import MedSchedule from "../components/MedSchedule";
+import DocOrder from "../components/DocOrder";
 import StatusCard from "../components/StatusCard";
 import { usePatients } from "../context/PatientContext";
 import type { Status } from "../components/StatusCard";
@@ -231,7 +231,7 @@ export default function PatientProfile() {
           </div>
         </div>
 
-        <MedSchedule patientId={patient.id} />
+        <DocOrder patientId={patient.id} />
       </div>
 
     </div>
