@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { loginUser } from "../utils/api";
 
 export default function Login() {
@@ -7,7 +6,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error,    setError]    = useState("");
   const [loading,  setLoading]  = useState(false);
-  const navigate                = useNavigate();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -17,7 +15,7 @@ export default function Login() {
       const { token, user } = await loginUser(email, password);
       localStorage.setItem("token", token);
       localStorage.setItem("user",  JSON.stringify(user));
-      navigate("/");
+      window.location.href = "/";
     } catch (e: any) {
       setError(e.message);
     } finally {
